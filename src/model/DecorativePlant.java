@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class DecorativePlant extends Flower {
     private String type;

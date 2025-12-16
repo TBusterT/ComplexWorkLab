@@ -1,9 +1,7 @@
 package command;
 
-import Model.Accessory;
-import Model.Bouquet;
-
-import java.util.Scanner;
+import model.Accessory;
+import model.Bouquet;
 
 public class AddAccessoryCommand implements Command {
 
@@ -14,28 +12,20 @@ public class AddAccessoryCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Add an accessory to the bouquet";
+    public void execute() {
+        System.out.print("Name: ");
+        String name = AbstractMenu.sc.nextLine();
+
+        System.out.print("Price: ");
+        double price = Double.parseDouble(AbstractMenu.sc.nextLine());
+
+        System.out.print("Material/color: ");
+        String m = AbstractMenu.sc.nextLine();
+
+        bouquet.addAccessory(new Accessory(name, price, m));
+        System.out.println("Accessory added.");
     }
 
-    @Override
-    public void execute(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter accessory name: ");
-        String name = sc.nextLine().trim();
-        System.out.print("Enter price: ");
-        double price;
-        try {
-            price = Double.parseDouble(sc.nextLine().trim());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid price. Operation cancelled.");
-            return;
-        }
-        System.out.print("Enter material or color: ");
-        String mat = sc.nextLine().trim();
-
-        Accessory a = new Accessory(name, price, mat);
-        bouquet.addAccessory(a);
-        System.out.println("Accessory added: " + a);
-    }
+    @Override public String getName() { return "addaccessory"; }
+    @Override public String getDesc() { return "Add accessory"; }
 }

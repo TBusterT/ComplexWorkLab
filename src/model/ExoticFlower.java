@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class ExoticFlower extends Flower {
     private String originCountry;

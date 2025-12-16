@@ -1,76 +1,54 @@
 package menu;
 
-import command.Command;
+import model.Bouquet;
+import command.*;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-public class MainMenu {
+public class MainMenu extends AbstractMenu {
 
-    private final FlowersMenu flowersMenu;
-    private final AccessoriesMenu accessoriesMenu;
-    private final FileMenu fileMenu;
-    private final Map<String, Command> commands; // доступ для help()
-
-    public MainMenu(Map<String, Command> commands,
-                    FlowersMenu flowersMenu,
-                    AccessoriesMenu accessoriesMenu,
-                    FileMenu fileMenu) {
-        this.commands = commands;
-        this.flowersMenu = flowersMenu;
-        this.accessoriesMenu = accessoriesMenu;
-        this.fileMenu = fileMenu;
+    public MainMenu(Bouquet bouquet) {
+        super("main", "Main menu", createCommands(bouquet));
     }
 
-    public void run() {
-        Scanner sc = new Scanner(System.in);
+    private static Map<String, Command> createCommands(Bouquet bouquet) {
+        Map<String, Command> map = new HashMap<>();
 
+        map.put("flowers", new FlowersMenu(bouquet));
+        map.put("accessories", new AccessoriesMenu(bouquet));
+        map.put("file", new FileMenu(bouquet));
+
+        map.put("show", new ShowBouquetCommand(bouquet));
+        map.put("total", new ShowTotalPriceCommand(bouquet));
+
+        return map;
+    }
+
+    @Override
+    protected void menuCycle() {
         while (true) {
             System.out.println("\n=== MAIN MENU ===");
             System.out.println("1 - Flowers");
             System.out.println("2 - Accessories");
             System.out.println("3 - File");
-            System.out.println("4 - Help");
-            System.out.println("5 - Exit");
+            System.out.println("4 - Show bouquet");
+            System.out.println("5 - Total price");
+            System.out.println("h - Help");
+            System.out.println("0 - Exit");
             System.out.print("> ");
 
-            String choice = sc.nextLine().trim();
-
-            switch (choice) {
-                case "1": flowersMenu.show(); break;
-                case "2": accessoriesMenu.show(); break;
-                case "3": fileMenu.show(); break;
-                case "4": help(); break;
-                case "5":
-                    System.out.println("Exiting...");
-                    return;
-                default:
-                    System.out.println("Unknown option.");
+            switch (sc.nextLine()) {
+                case "1": exec("flowers"); break;
+                case "2": exec("accessories"); break;
+                case "3": exec("file"); break;
+                case "4": exec("show"); break;
+                case "5": exec("total"); break;
+                case "h": help(); break;
+                case "0": return;
+                default: System.out.println("Wrong option");
             }
         }
     }
 
-
-    public void help() {
-        System.out.println("\n--- HELP: Available commands ---");
-        if (commands == null || commands.isEmpty()) {
-            System.out.println("No commands registered.");
-            return;
-        }
-
-        for (Map.Entry<String, Command> e : commands.entrySet()) {
-            String key = e.getKey();
-            String desc;
-            try {
-                desc = e.getValue() != null ? e.getValue().getDescription() : "(no description)";
-            } catch (Exception ex) {
-                desc = "(error reading description)";
-            }
-            System.out.printf("%-12s : %s%n", key, desc);
-        }
-
-        System.out.println("\nNotes:");
-        System.out.println(" - Use submenus to execute interactive commands (Flowers / File).");
-        System.out.println(" - You can also call some commands directly from submenus if implemented.");
-    }
 }

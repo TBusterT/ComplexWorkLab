@@ -1,8 +1,6 @@
 package command;
 
-import Model.Bouquet;
-
-import java.util.Scanner;
+import model.Bouquet;
 
 public class SaveBouquetCommand implements Command {
 
@@ -13,30 +11,17 @@ public class SaveBouquetCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Save bouquet to file: save <filename> or save";
-    }
-
-    @Override
-    public void execute(String[] args) {
-        String filename;
-        if (args.length >= 2) {
-            filename = args[1];
-        } else {
-            System.out.print("Enter file name to save: ");
-            filename = new Scanner(System.in).nextLine().trim();
-
-            if (filename.isEmpty()) {
-                System.out.println("File name cannot be empty. Operation cancelled.");
-                return;
-            }
-        }
-
+    public void execute() {
+        System.out.print("Filename: ");
+        String file = AbstractMenu.sc.nextLine();
         try {
-            bouquet.saveToFile(filename);
-            System.out.println("Bouquet saved to file: " + filename);
+            bouquet.saveToFile(file);
+            System.out.println("Saved.");
         } catch (Exception e) {
-            System.out.println("Failed to save bouquet: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
+    @Override public String getName() { return "save"; }
+    @Override public String getDesc() { return "Save bouquet to file"; }
 }

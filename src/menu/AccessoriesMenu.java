@@ -1,39 +1,43 @@
 package menu;
 
-import command.Command;
-
+import model.Bouquet;
+import command.*;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-public class AccessoriesMenu {
+public class AccessoriesMenu extends AbstractMenu {
 
-    private final Map<String, Command> commands;
-
-    public AccessoriesMenu(Map<String, Command> commands) {
-        this.commands = commands;
+    public AccessoriesMenu(Bouquet bouquet) {
+        super("accessories", "Accessories submenu", createCommands(bouquet));
     }
 
-    public void show() {
-        Scanner sc = new Scanner(System.in);
+    private static Map<String, Command> createCommands(Bouquet bouquet) {
+        Map<String, Command> map = new HashMap<>();
 
+        map.put("add", new AddAccessoryCommand(bouquet));
+        map.put("remove", new RemoveAccessoryCommand(bouquet));
+
+        return map;
+    }
+
+    @Override
+    protected void menuCycle() {
         while (true) {
             System.out.println("\n--- Accessories Menu ---");
             System.out.println("1 - Add accessory");
             System.out.println("2 - Remove accessory");
-            System.out.println("3 - Show accessories (via bouquet)");
+            System.out.println("h - Help");
             System.out.println("0 - Back");
             System.out.print("> ");
 
-            switch (sc.nextLine().trim()) {
-                case "1": commands.get("addaccessory").execute(new String[]{"addaccessory"}); break;
-                case "2": commands.get("removeaccessory").execute(new String[]{"removeaccessory"}); break;
-                case "3":
-                    // reuse show bouquet command to view accessories
-                    commands.get("show").execute(new String[]{"show"});
-                    break;
+            switch (sc.nextLine()) {
+                case "1": exec("add"); break;
+                case "2": exec("remove"); break;
+                case "h": help(); break;
                 case "0": return;
-                default: System.out.println("Unknown option.");
+                default: System.out.println("Wrong option");
             }
         }
     }
+
 }

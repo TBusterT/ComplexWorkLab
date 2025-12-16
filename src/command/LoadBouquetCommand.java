@@ -1,8 +1,6 @@
 package command;
 
-import Model.Bouquet;
-
-import java.util.Scanner;
+import model.Bouquet;
 
 public class LoadBouquetCommand implements Command {
 
@@ -13,25 +11,17 @@ public class LoadBouquetCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Load bouquet from file: load <filename> or load ";
-    }
-
-    @Override
-    public void execute(String[] args) {
-        String filename;
-        if (args.length >= 2) {
-            filename = args[1];
-        } else {
-            System.out.print("Enter file name to load: ");
-            filename = new Scanner(System.in).nextLine().trim();
-        }
-
+    public void execute() {
+        System.out.print("Filename: ");
+        String file = AbstractMenu.sc.nextLine();
         try {
-            bouquet.loadFromFile(filename);
-            System.out.println("Bouquet loaded from file: " + filename);
+            bouquet.loadFromFile(file);
+            System.out.println("Loaded.");
         } catch (Exception e) {
-            System.out.println("Failed to load bouquet: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
+    @Override public String getName() { return "load"; }
+    @Override public String getDesc() { return "Load bouquet from file"; }
 }

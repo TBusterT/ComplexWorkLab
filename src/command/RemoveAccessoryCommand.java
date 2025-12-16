@@ -1,10 +1,8 @@
 package command;
 
-import Model.Accessory;
-import Model.Bouquet;
-
+import model.Accessory;
+import model.Bouquet;
 import java.util.List;
-import java.util.Scanner;
 
 public class RemoveAccessoryCommand implements Command {
 
@@ -15,34 +13,18 @@ public class RemoveAccessoryCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Remove an accessory from the bouquet by index";
+    public void execute() {
+        List<Accessory> list = bouquet.getAccessories();
+        for (int i = 0; i < list.size(); i++)
+            System.out.println((i+1) + " - " + list.get(i));
+
+        System.out.print("Choose: ");
+        int idx = Integer.parseInt(AbstractMenu.sc.nextLine()) - 1;
+
+        bouquet.removeAccessory(list.get(idx));
+        System.out.println("Removed.");
     }
 
-    @Override
-    public void execute(String[] args) {
-        List<Accessory> list = bouquet.getAccessories();
-        if (list.isEmpty()) {
-            System.out.println("No accessories to remove.");
-            return;
-        }
-        System.out.println("Accessories:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + " - " + list.get(i));
-        }
-        System.out.print("Enter accessory number to remove: ");
-        Scanner sc = new Scanner(System.in);
-        try {
-            int idx = Integer.parseInt(sc.nextLine().trim()) - 1;
-            if (idx >= 0 && idx < list.size()) {
-                Accessory removed = list.get(idx);
-                bouquet.removeAccessory(removed);
-                System.out.println("Removed: " + removed);
-            } else {
-                System.out.println("Index out of range.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input.");
-        }
-    }
+    @Override public String getName() { return "removeaccessory"; }
+    @Override public String getDesc() { return "Remove accessory"; }
 }

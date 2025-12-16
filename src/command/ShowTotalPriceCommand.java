@@ -1,6 +1,6 @@
 package command;
 
-import Model.Bouquet;
+import model.Bouquet;
 
 public class ShowTotalPriceCommand implements Command {
 
@@ -11,12 +11,10 @@ public class ShowTotalPriceCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Show total price of bouquet (flowers + accessories)";
+    public void execute() {
+        System.out.println("Total: " + bouquet.getTotalPrice());
     }
 
-    @Override
-    public void execute(String[] args) {
-        System.out.printf("Total bouquet price: %.2f%n", bouquet.getTotalPrice());
-    }
+    @Override public String getName() { return "total"; }
+    @Override public String getDesc() { return "Show total price"; }
 }

@@ -1,9 +1,8 @@
 package command;
 
-import Model.Bouquet;
-import Model.Flower;
-
-import java.util.Scanner;
+import model.Bouquet;
+import model.Flower;
+import java.util.List;
 
 public class RemoveFlowerCommand implements Command {
 
@@ -14,30 +13,29 @@ public class RemoveFlowerCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Remove a flower from the bouquet by name";
-    }
-
-    @Override
-    public void execute(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter the name of the flower to remove: ");
-        String name = sc.nextLine().trim();
-
-        Flower target = null;
-        for (Flower f : bouquet.getFlowers()) {
-            if (f.getName().equalsIgnoreCase(name)) {
-                target = f;
-                break;
-            }
+    public void execute() {
+        List<Flower> list = bouquet.getFlowers();
+        if (list.isEmpty()) {
+            System.out.println("No flowers.");
+            return;
         }
 
-        if (target != null) {
-            bouquet.removeFlower(target);
-            System.out.println("Flower removed: " + target);
-        } else {
-            System.out.println("No flower with this name found.");
+        for (int i = 0; i < list.size(); i++)
+            System.out.println((i+1) + " - " + list.get(i));
+
+        System.out.print("Choose number: ");
+        int idx = Integer.parseInt(AbstractMenu.sc.nextLine()) - 1;
+
+        if (idx < 0 || idx >= list.size()) {
+            System.out.println("Wrong index.");
+            return;
         }
+
+        Flower f = list.get(idx);
+        bouquet.removeFlower(f);
+        System.out.println("Removed: " + f);
     }
+
+    @Override public String getName() { return "removeflower"; }
+    @Override public String getDesc() { return "Remove flower by index"; }
 }

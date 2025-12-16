@@ -1,6 +1,6 @@
 package command;
 
-import Model.Bouquet;
+import model.Bouquet;
 
 public class ShowBouquetCommand implements Command {
 
@@ -11,13 +11,10 @@ public class ShowBouquetCommand implements Command {
     }
 
     @Override
-    public String getDescription() {
-        return "Display all flowers and accessories in the bouquet";
-    }
-
-    @Override
-    public void execute(String[] args) {
-        System.out.println("=== Current Bouquet(s) ===");
+    public void execute() {
         System.out.println(bouquet);
     }
+
+    @Override public String getName() { return "show"; }
+    @Override public String getDesc() { return "Show bouquet"; }
 }
