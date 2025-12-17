@@ -1,0 +1,7 @@
+2025-12-17 20:43:34 INFO  main.command.AddFlowerCommand - AddFlowerCommand started
+2025-12-17 20:43:58 INFO  main.command.AddFlowerCommand - Flower added: Flower{name='Rose', color='Red', stemLength=11.0, price=111.0, freshness=11, lifespan=111}
+2025-12-17 21:01:57 INFO  main.command.AddAccessoryCommand - AddAccessoryCommand started
+2025-12-17 21:02:13 INFO  main.command.AddAccessoryCommand - Accessory added: Accessory{name='Lace', price=111.0, materialOrColor='silk'}
+2025-12-17 21:02:23 INFO  main.command.LoadBouquetCommand - LoadBouquetCommand started
+2025-12-17 21:02:27 INFO  main.command.LoadBouquetCommand - Bouquet loaded from file: First
+2025-12-17 22:17:36 INFO  main.command.AddFlowerCommand - AddFlowerCommand started

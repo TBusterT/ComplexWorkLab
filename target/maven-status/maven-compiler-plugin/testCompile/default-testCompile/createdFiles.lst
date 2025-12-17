@@ -1,0 +1,11 @@
+test\java\command\FlowerTest.class
+test\java\command\RemoveFlowerCommandTest.class
+test\java\command\RemoveAccessoryCommandTest.class
+test\java\command\UpdateFlowerCommandTest.class
+test\java\command\LoadBouquetCommandTest.class
+test\java\command\SearchFlowersCommandTest.class
+test\java\command\AddFlowerCommandTest.class
+test\java\command\SortFlowersCommandTest.class
+test\java\command\AddAccessoryCommandTest.class
+test\java\command\BouquetTest.class
+test\java\command\SaveBouquetCommandTest.class
