@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: test.java.command.AddFlowerCommandTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.076 s <<< FAILURE! -- in test.java.command.AddFlowerCommandTest
+test.java.command.AddFlowerCommandTest.shouldAllowMinimalValues -- Time elapsed: 0.008 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at main.java.command.AddFlowerCommand.execute(AddFlowerCommand.java:25)
+	at test.java.command.AddFlowerCommandTest.shouldAllowMinimalValues(AddFlowerCommandTest.java:96)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+test.java.command.AddFlowerCommandTest.shouldAddMultipleFlowers -- Time elapsed: 0.003 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at main.java.command.AddFlowerCommand.execute(AddFlowerCommand.java:25)
+	at test.java.command.AddFlowerCommandTest.shouldAddMultipleFlowers(AddFlowerCommandTest.java:76)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+test.java.command.AddFlowerCommandTest.flowerParametersShouldBeCorrect -- Time elapsed: 0.002 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at main.java.command.AddFlowerCommand.execute(AddFlowerCommand.java:25)
+	at test.java.command.AddFlowerCommandTest.flowerParametersShouldBeCorrect(AddFlowerCommandTest.java:59)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+test.java.command.AddFlowerCommandTest.shouldAddFlowerToBouquet -- Time elapsed: 0.001 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1690)
+	at main.java.command.AddFlowerCommand.execute(AddFlowerCommand.java:25)
+	at test.java.command.AddFlowerCommandTest.shouldAddFlowerToBouquet(AddFlowerCommandTest.java:39)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
